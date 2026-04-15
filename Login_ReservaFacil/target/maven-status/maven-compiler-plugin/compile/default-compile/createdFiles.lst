@@ -1,0 +1,3 @@
+com\mycompany\login_reservafacil\resources\JakartaEE8Resource.class
+com\mycompany\login_reservafacil\JakartaRestConfiguration.class
+com\mycompany\login_reservafacil\servlets\LoginServlet.class
