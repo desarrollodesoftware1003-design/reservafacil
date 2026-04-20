@@ -15,7 +15,7 @@ public class Main {
 
         // CONSULTAR
         dao.listarUsuarios().forEach(user ->
-                System.out.println(user.getNombre())
+                System.out.println(user.getUsuario())
         );
     }
 }
