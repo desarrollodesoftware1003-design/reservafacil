@@ -11,12 +11,12 @@ public class UsuarioDAO {
 
     // INSERTAR
     public void insertarUsuario(Usuario usuario) {
-        String sql = "INSERT INTO usuario(nombre, correo, password) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO usuario(usuario, correo, password) VALUES (?, ?, ?)";
 
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, usuario.getNombre());
+            ps.setString(1, usuario.getUsuario());
             ps.setString(2, usuario.getCorreo());
             ps.setString(3, usuario.getPassword());
             ps.executeUpdate();
@@ -40,7 +40,7 @@ public class UsuarioDAO {
             while (rs.next()) {
                 Usuario u = new Usuario();
                 u.setId(rs.getInt("id"));
-                u.setNombre(rs.getString("nombre"));
+                u.setUsuario(rs.getString("usuario"));
                 u.setCorreo(rs.getString("correo"));
                 u.setPassword(rs.getString("password"));
 
@@ -56,12 +56,12 @@ public class UsuarioDAO {
 
     // ACTUALIZAR
     public void actualizarUsuario(Usuario usuario) {
-        String sql = "UPDATE usuario SET nombre=?, correo=?, password=? WHERE id=?";
+        String sql = "UPDATE usuario SET usuario=?, correo=?, password=? WHERE id=?";
 
         try (Connection con = ConexionBD.conectar();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
-            ps.setString(1, usuario.getNombre());
+            ps.setString(1, usuario.getUsuario());
             ps.setString(2, usuario.getCorreo());
             ps.setString(3, usuario.getPassword());
             ps.setInt(4, usuario.getId());
