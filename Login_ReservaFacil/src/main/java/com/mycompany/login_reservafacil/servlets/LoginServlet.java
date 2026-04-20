@@ -26,7 +26,7 @@ public class LoginServlet extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String password = request.getParameter("password");
 
-        String url = "jdbc:mysql://localhost:3307/servletlogin";
+        String url= "jdbc:mysql://localhost:3307/reservafacil";
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
