@@ -83,7 +83,8 @@ button:hover {
 
 /* SECCIÓN REGISTRO */
 .register-box {
-    margin-top: 25px;
+    margin-top: 20px;
+    text-align: center;
 }
 
 .register-box span {
@@ -93,12 +94,15 @@ button:hover {
 
 .register-btn {
     padding: 5px 12px;
+    margin: 5px;
     border-radius: 20px;
     border: 2px solid #2d5be3;
     color: #2d5be3;
     text-decoration: none;
     font-weight: bold;
     transition: 0.3s;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .register-btn:hover {
