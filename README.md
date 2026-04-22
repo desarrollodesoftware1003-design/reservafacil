@@ -5,17 +5,23 @@ Sistema web de autenticación desarrollado en Java con Servlets y MySQL.
 ## Funcionalidades
 - Registro de usuarios
 - Inicio de sesión
-- Recuperación de contraseña (simulada)
-- Interfaz moderna con HTML y CSS
+- Recuperación de contraseña
+- Interfaz web con HTML y CSS
 
 ## Tecnologías
-- Java
-- Servlets
+- Java (Servlets)
 - MySQL
-- HTML / CSS
+- HTML
+- CSS
+
+## Cómo ejecutar el proyecto
+1. Clonar el repositorio
+2. Importar en NetBeans
+3. Configurar base de datos MySQL (puerto 3307)
+4. Ejecutar en Apache Tomcat
 
 ## Base de datos
-El script se encuentra en /database/reservafacil.sql
+El script está en la carpeta `/database`
 
 ## Autor
 Paula Villar
