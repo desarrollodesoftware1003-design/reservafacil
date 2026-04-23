@@ -1,16 +1,19 @@
 # ReservaFácil 
 
-Sistema web desarrollado en Java que permite a los usuarios registrarse, iniciar sesión y recuperar su contraseña dentro de una plataforma de reservas.
+Aplicación web desarrollada en Java que permite a los usuarios registrarse, iniciar sesión y recuperar su contraseña dentro de un sistema de reservas.
+
+Este proyecto forma parte del proceso de formación en Análisis y Desarrollo de Software.
 
 ---
 
-## Funcionalidades
+## Funcionalidades principales
 
 * Registro de usuarios
 * Inicio de sesión
 * Recuperación de contraseña
+* Validación de datos desde formularios
 * Conexión a base de datos MySQL
-* Interfaz moderna con HTML y CSS
+* Interfaz moderna y responsiva
 
 ---
 
@@ -33,6 +36,9 @@ Login_ReservaFacil/
 │   └── main/
 │       ├── java/
 │       │   └── com/mycompany/login_reservafacil/servlets/
+│       │       ├── LoginServlet.java
+│       │       ├── RegistroServlet.java
+│       │       └── RecuperarServlet.java
 │       └── webapp/
 │           ├── index.html
 │           ├── registro.html
@@ -45,7 +51,7 @@ Login_ReservaFacil/
 
 ---
 
-## Configuración
+## Configuración del proyecto
 
 1. Clonar el repositorio:
 
@@ -55,7 +61,11 @@ git clone https://github.com/desarrollodesoftware1003-design/reservafacil.git
 
 2. Importar el proyecto en NetBeans
 
-3. Configurar la base de datos en MySQL
+3. Configurar la conexión a la base de datos en los Servlets:
+
+```java
+String url = "jdbc:mysql://localhost:3307/reservafacil";
+```
 
 4. Ejecutar el proyecto con Apache Tomcat
 
@@ -70,14 +80,14 @@ USE reservafacil;
 
 CREATE TABLE usuarios (
     id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100),
-    correo VARCHAR(100),
-    password VARCHAR(100)
+    nombre VARCHAR(100) NOT NULL,
+    correo VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(100) NOT NULL
 );
 
-```
+---
 
-## Autor
+## Autora
 
 **Paula Villar**
 Estudiante de Análisis y Desarrollo de Software - SENA
@@ -87,15 +97,23 @@ Estudiante de Análisis y Desarrollo de Software - SENA
 ## Estado del proyecto
 
 * Funcional
-* En desarrollo
+* Proyecto académico
+* Escalable
 
 ---
 
 ## Mejoras futuras
 
 * Encriptación de contraseñas
-* Sistema de roles (administrador/cliente)
-* Panel de administración
-* Gestión completa de reservas
+* Validación avanzada de formularios
+* Sistema de roles (admin / usuario)
+* Módulo completo de reservas
+* Panel administrativo
+
+---
+
+## Objetivo del proyecto
+
+Este sistema fue desarrollado con el propósito de aplicar conceptos de desarrollo web backend con Java, manejo de bases de datos y diseño de interfaces funcionales.
 
 ---
