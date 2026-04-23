@@ -1,3 +1,4 @@
+/* RESET CLAVE */
 * {
     box-sizing: border-box;
 }
@@ -109,4 +110,52 @@ button:hover {
     background: #2d5be3;
     color: white;
     transform: scale(1.05);
+}
+
+/* SOLO PARA RECUPERAR */
+.recuperar-box {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ALERTAS */
+.alert {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: left;
+}
+
+/* ÉXITO (VERDE) */
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border-left: 5px solid #28a745;
+}
+
+/* ERROR (ROJO) */
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-left: 5px solid #dc3545;
+}
+
+.alert {
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
