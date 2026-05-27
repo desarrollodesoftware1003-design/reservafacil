@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.mindrot.jbcrypt.BCrypt;
 
 // IMPORTS SQL
 import java.sql.Connection;
@@ -36,19 +37,21 @@ public class LoginServlet extends HttpServlet {
         try {
             Connection conexion = DriverManager.getConnection(url, "root", "");
 
-            String sql = ("SELECT * FROM usuarios WHERE usuario=? AND password=?");
-            PreparedStatement ps = conexion.prepareStatement(sql);
-            ps.setString(1, usuario);
-            ps.setString(2, password);
-
-            ResultSet rs = ps.executeQuery();
-
-            if (rs.next()) {
-                request.getSession().setAttribute("usuario", usuario);
-                response.sendRedirect("panel.jsp");
-            } else {
-                response.sendRedirect("index.html");
-            }
+           String sql = "SELECT password FROM usuarios WHERE usuario=?";
+           PreparedStatement ps = conexion.prepareStatement(sql);
+           ps.setString(1, usuario);
+           ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+           String passwordGuardada = rs.getString("password");
+        if (BCrypt.checkpw(password, passwordGuardada)) {
+        request.getSession().setAttribute("usuario", usuario);
+        response.sendRedirect("panel.jsp");
+    } else {
+        response.sendRedirect("index.html?error=1");
+    }
+    }    else {
+    response.sendRedirect("index.html?error=1");
+    }
 
         } catch (IOException | SQLException e) {
             response.getWriter().println("Error: " + e.getMessage());
