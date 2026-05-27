@@ -1,119 +1,48 @@
-# ReservaFácil 
+# ReservaFácil
 
-Aplicación web desarrollada en Java que permite a los usuarios registrarse, iniciar sesión y recuperar su contraseña dentro de un sistema de reservas.
+Sistema web de reservas de vuelos y hoteles desarrollado con Java, JSP, MySQL y HTML/CSS/JavaScript.
 
-Este proyecto forma parte del proceso de formación en Análisis y Desarrollo de Software.
+## Funcionalidades
 
----
-
-## Funcionalidades principales
-
-* Registro de usuarios
-* Inicio de sesión
-* Recuperación de contraseña
-* Validación de datos desde formularios
-* Conexión a base de datos MySQL
-* Interfaz moderna y responsiva
-
----
+- Registro de usuarios con validación de contraseñas
+- Login seguro con sesiones
+- Recuperación de contraseña
+- Contraseñas encriptadas con BCrypt
+- Interfaz responsive adaptada a móviles y escritorio
 
 ## Tecnologías utilizadas
 
-* Java (Servlets)
-* Apache Tomcat
-* MySQL
-* HTML5
-* CSS3
-* Maven
-
----
-
-## Estructura del proyecto
-
-```
-Login_ReservaFacil/
-│── src/
-│   └── main/
-│       ├── java/
-│       │   └── com/mycompany/login_reservafacil/servlets/
-│       │       ├── LoginServlet.java
-│       │       ├── RegistroServlet.java
-│       │       └── RecuperarServlet.java
-│       └── webapp/
-│           ├── index.html
-│           ├── registro.html
-│           ├── recuperar.html
-│           ├── registro_exitoso.html
-│           ├── panel.jsp
-│           ├── styles.css
-│── pom.xml
-```
-
----
+| Frontend | Backend | Base de datos |
+|----------|---------|---------------|
+| HTML5 | Java Servlets | MySQL |
+| CSS3 | JSP | XAMPP |
+| JavaScript | Maven | phpMyAdmin |
+| | BCrypt | |
 
 ## Cómo ejecutar el proyecto
 
-1. Clonar el repositorio:
-
-```
-git clone https://github.com/desarrollodesoftware1003-design/reservafacil.git
-```
-
-2. Importar el proyecto en NetBeans
-
-3. Configurar la conexión a la base de datos en los Servlets:
-
-```java
-String url = "jdbc:mysql://localhost:3307/reservafacil";
-```
-
-4. Ejecutar el proyecto con Apache Tomcat
-
----
-
-## Base de datos
+1. Clona el repositorio
+2. Abre el proyecto en NetBeans como proyecto Maven
+3. Inicia MySQL en XAMPP en el puerto 3307
+4. Crea la base de datos ejecutando en phpMyAdmin:
 
 ```sql
 CREATE DATABASE reservafacil;
-
 USE reservafacil;
-
 CREATE TABLE usuarios (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(100) NOT NULL
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(100) NOT NULL,
+    correo VARCHAR(150) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+```
 
----
+5. Ejecuta el proyecto con el botón Play de NetBeans
+6. Abre en el navegador: `http://localhost:8080/Login_ReservaFacil`
 
 ## Autora
 
-**Paula Villar**
-Estudiante de Análisis y Desarrollo de Software - SENA
-
----
-
-## Estado del proyecto
-
-* Funcional
-* Proyecto académico
-* Escalable
-
----
-
-## Mejoras futuras
-
-* Encriptación de contraseñas
-* Validación avanzada de formularios
-* Sistema de roles (admin / usuario)
-* Módulo completo de reservas
-* Panel administrativo
-
----
-
-## Objetivo del proyecto
-
-Este sistema fue desarrollado con el propósito de aplicar conceptos de desarrollo web backend con Java, manejo de bases de datos y diseño de interfaces funcionales.
-
----
+**Paula Villar**  
+Estudiante de Análisis y Desarrollo de Software  
+Barranquilla, Colombia
