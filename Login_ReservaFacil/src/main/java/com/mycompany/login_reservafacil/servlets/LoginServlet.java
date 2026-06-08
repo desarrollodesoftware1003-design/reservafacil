@@ -24,7 +24,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        String usuario = request.getParameter("usuario");
+        String usuario = request.getParameter("correo");
         String password = request.getParameter("password");
 
         String url= "jdbc:mysql://localhost:3307/reservafacil";
@@ -35,23 +35,31 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-            Connection conexion = DriverManager.getConnection(url, "root", "");
+           Connection conexion = DriverManager.getConnection(url, "root", "ae020912");
+        String sql = "SELECT nombre, password FROM usuarios WHERE correo=?";
+        PreparedStatement ps = conexion.prepareStatement(sql);
+        ps.setString(1, usuario);
+        ResultSet rs = ps.executeQuery();
 
-           String sql = "SELECT password FROM usuarios WHERE usuario=?";
-           PreparedStatement ps = conexion.prepareStatement(sql);
-           ps.setString(1, usuario);
-           ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-           String passwordGuardada = rs.getString("password");
+
+        String nombre = rs.getString("nombre");
+        String passwordGuardada = rs.getString("password");
+
         if (BCrypt.checkpw(password, passwordGuardada)) {
-        request.getSession().setAttribute("usuario", usuario);
+
+        request.getSession().setAttribute("usuario", nombre);
         response.sendRedirect("panel.jsp");
-    } else {
+
+    }   else {
+
         response.sendRedirect("index.html?error=1");
     }
-    }    else {
-    response.sendRedirect("index.html?error=1");
-    }
+
+}       else {
+
+        response.sendRedirect("index.html?error=1");
+}
 
         } catch (IOException | SQLException e) {
             response.getWriter().println("Error: " + e.getMessage());

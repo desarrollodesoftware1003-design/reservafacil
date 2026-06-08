@@ -15,6 +15,19 @@
         <p class="subtitle">Crea tu cuenta</p>
     </div>
 
+      <div id="mensaje"></div>
+    
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    const mensajeDiv = document.getElementById("mensaje");
+
+    if (error === "1") {
+        mensajeDiv.innerHTML = "No se pudo crear la cuenta. Verifica que las contraseñas coincidan o que el correo no esté registrado.";
+        mensajeDiv.className = "alert error";
+    }
+    </script>
+    
     <form action="registro" method="post">
 
         <input type="text" name="usuario" placeholder="Nombre completo" required>
@@ -35,6 +48,6 @@
     </div>
 
 </div>
-
+    
 </body>
 </html>

@@ -12,12 +12,31 @@
 
     <div class="header">
         <h1>Recupera tu contraseña</h1>
-        <p class="subtitle">Ingresa tu usuario o correo para recuperar tu acceso</p>
+        <p class="subtitle">Ingresa tu correo para recuperar el acceso</p>
     </div>
+    
+    <div id="mensaje"></div>
+    
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+
+    const mensajeDiv = document.getElementById("mensaje");
+
+    if (msg === "ok") {
+        mensajeDiv.innerHTML = "Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.";
+        mensajeDiv.className = "alert success";
+    }
+
+    if (msg === "error") {
+        mensajeDiv.innerHTML = "Usuario o correo no encontrado.";
+        mensajeDiv.className = "alert error";
+    }
+    </script>
 
     <form action="recuperar" method="post">
 
-        <input type="text" name="usuario" placeholder="Usuario o correo" required>
+        <input type="email" name="usuario" placeholder="Correo electrónico"required>
 
         <button type="submit">Recuperar</button>
 
@@ -27,23 +46,6 @@
         <span>¿Recordaste tu contraseña?</span>
         <a class="register-btn" href="index.html">Iniciar sesión</a>
     </div>
-
-<script>
-    const params = new URLSearchParams(window.location.search);
-    const msg = params.get("msg");
-
-    const mensajeDiv = document.getElementById("mensaje");
-
-    if (msg === "ok") {
-        mensajeDiv.innerHTML = "✔ Te hemos enviado un correo con las instrucciones para recuperar tu contraseña.";
-        mensajeDiv.className = "alert success";
-    }
-
-    if (msg === "error") {
-        mensajeDiv.innerHTML = "❌ Usuario o correo no encontrado.";
-        mensajeDiv.className = "alert error";
-    }
-</script>
     
 </div>
 

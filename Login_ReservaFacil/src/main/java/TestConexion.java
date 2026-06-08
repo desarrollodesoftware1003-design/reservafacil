@@ -7,7 +7,7 @@ public class TestConexion {
 
         String url = "jdbc:mysql://localhost:3307/reservafacil";
         String user = "root";
-        String pass = "";
+        String pass = "ae020912";
 
         try {
             Connection con = DriverManager.getConnection(url, user, pass);

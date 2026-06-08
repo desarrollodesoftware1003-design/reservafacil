@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+.panel-body {
+    background: #f0f4ff;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+.panel-nav {
+    background: #2d5be3;
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
+.panel-logo {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.panel-usuario {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+    font-size: 15px;
+}
+
+.btn-logout {
+    background: white;
+    color: #2d5be3;
+    padding: 8px 18px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background: #f0f4ff;
+}
+
+/* CONTENIDO PRINCIPAL */
+.panel-main {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.panel-bienvenida {
+    font-size: 32px;
+    color: #2d5be3;
+    margin-bottom: 10px;
+}
+
+.panel-subtitulo {
+    color: #555;
+    font-size: 16px;
+    margin-bottom: 50px;
+}
+
+/* CARDS */
+.panel-cards {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.panel-card {
+    background: white;
+    border-radius: 16px;
+    padding: 35px 25px;
+    width: 280px;
+    text-decoration: none;
+    color: #333;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: 0.3s;
+    text-align: center;
+}
+
+.panel-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(45,91,227,0.2);
+}
+
+.card-icono {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.panel-card h3 {
+    font-size: 18px;
+    color: #2d5be3;
+    margin-bottom: 10px;
+}
+
+.panel-card p {
+    font-size: 14px;
+    color: #777;
+    line-height: 1.5;
+}

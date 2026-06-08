@@ -16,7 +16,7 @@ public class RegistroServlet extends HttpServlet {
 
     String url = "jdbc:mysql://localhost:3307/reservafacil?useSSL=false&serverTimezone=UTC";
     String user = "root";
-    String pass = "";
+    String pass = "ae020912";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +36,7 @@ public class RegistroServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, pass);
 
-            String sql = "INSERT INTO usuarios (usuario, correo, password) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO usuarios (nombre, correo, password) VALUES (?, ?, ?)";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, usuario);

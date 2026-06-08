@@ -10,13 +10,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.UUID;
+import com.mycompany.login_reservafacil.util.EmailUtil;
 
 @WebServlet("/recuperar")
 public class RecuperarServlet extends HttpServlet {
 
     String url = "jdbc:mysql://localhost:3307/reservafacil";
     String user = "root";
-    String pass = "";
+    String pass = "ae020912";
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,7 +30,7 @@ public class RecuperarServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection(url, user, pass);
 
-            String sql = "SELECT * FROM usuarios WHERE usuario = ? OR correo = ?";
+            String sql = "SELECT * FROM usuarios WHERE correo = ?";
             PreparedStatement ps = con.prepareStatement(sql);
 
             ps.setString(1, usuario);
@@ -37,16 +39,35 @@ public class RecuperarServlet extends HttpServlet {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                // Usuario encontrado
-                response.sendRedirect("recuperar.html?msg=ok");
-            } else {
-                // Usuario no encontrado
-                response.sendRedirect("recuperar.html?msg=error");
-            }
 
-            rs.close();
-            ps.close();
-            con.close();
+            String correo = rs.getString("correo");
+
+            String token = UUID.randomUUID().toString();
+
+            String updateSql = "UPDATE usuarios SET token_recuperacion=? WHERE correo=?";
+
+            PreparedStatement psUpdate =
+            con.prepareStatement(updateSql);
+
+            psUpdate.setString(1, token);
+            psUpdate.setString(2, correo);
+
+            psUpdate.executeUpdate();
+
+            String enlace = "http://localhost:8080/Login_ReservaFacil/reset-password.html?token="
+            + token;
+
+            EmailUtil.enviarCorreo(correo, enlace);
+
+            psUpdate.close();
+
+            response.sendRedirect("recuperar.html?msg=ok");
+
+} else {
+
+            response.sendRedirect("recuperar.html?msg=error");
+
+}
 
         } catch (Exception e) {
             e.printStackTrace();

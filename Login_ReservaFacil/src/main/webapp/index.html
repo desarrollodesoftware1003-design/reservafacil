@@ -14,16 +14,28 @@
         <h1>ReservaFácil</h1>
         <p class="subtitle">Inicia sesión para continuar</p>
     </div>
+    
+        <div id="mensaje"></div>
+    
+    <script>
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get("error");
+    const mensajeDiv = document.getElementById("mensaje");
+
+    if (error === "1") {
+        mensajeDiv.innerHTML = "Correo o contraseña incorrectos.";
+        mensajeDiv.className = "alert error";
+    }
+    </script>
 
     <form action="login" method="post">
-        <input type="text" name="usuario" placeholder="Usuario" required>
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
         <input type="password" name="password" placeholder="Contraseña" required>
 
         <button type="submit">Ingresar</button>
 
         <div class="links">
-    <a href="recuperar.html">¿Olvidaste tu contraseña?</a>
-</div>
+        <a href="recuperar.html">¿Olvidaste tu contraseña?</a></div>
     </form>
 
     <div class="register-box">
