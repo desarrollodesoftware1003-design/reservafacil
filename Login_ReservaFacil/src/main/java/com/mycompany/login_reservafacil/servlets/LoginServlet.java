@@ -1,5 +1,6 @@
 package com.mycompany.login_reservafacil.servlets;
 
+import com.mycompany.login_reservafacil.util.ConfigUtil;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,8 +27,7 @@ public class LoginServlet extends HttpServlet {
 
         String usuario = request.getParameter("correo");
         String password = request.getParameter("password");
-
-        String url= "jdbc:mysql://localhost:3307/reservafacil";
+        
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException ex) {
@@ -35,7 +35,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-           Connection conexion = DriverManager.getConnection(url, "root", "ae020912");
+           String url = ConfigUtil.get("db.url");
+           String user = ConfigUtil.get("db.user");
+           String pass = ConfigUtil.get("db.password");
+
+        Connection conexion = DriverManager.getConnection(url, user, pass);
         String sql = "SELECT nombre, password FROM usuarios WHERE correo=?";
         PreparedStatement ps = conexion.prepareStatement(sql);
         ps.setString(1, usuario);
@@ -55,6 +59,7 @@ public class LoginServlet extends HttpServlet {
 
         response.sendRedirect("index.html?error=1");
     }
+        
 
 }       else {
 

@@ -12,13 +12,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 import com.mycompany.login_reservafacil.util.EmailUtil;
+import com.mycompany.login_reservafacil.util.ConfigUtil;
 
 @WebServlet("/recuperar")
 public class RecuperarServlet extends HttpServlet {
 
-    String url = "jdbc:mysql://localhost:3307/reservafacil";
-    String user = "root";
-    String pass = "ae020912";
+    private String dbUrl;
+    private String dbUser;
+    private String dbPass;
+
+    @Override
+    public void init() throws ServletException {
+        dbUrl = ConfigUtil.get("db.url");
+        dbUser = ConfigUtil.get("db.user");
+        dbPass = ConfigUtil.get("db.password");
+        
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -28,46 +37,36 @@ public class RecuperarServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(url, user, pass);
+            Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass);
 
-            String sql = "SELECT * FROM usuarios WHERE correo = ?";
+            String sql = "SELECT id_usuario, correo FROM usuarios WHERE correo = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-
             ps.setString(1, usuario);
-            ps.setString(2, usuario);
-
+            
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
+                String correo = rs.getString("correo");
+                String token = UUID.randomUUID().toString();
 
-            String correo = rs.getString("correo");
+                String updateSql = "UPDATE usuarios SET token_recuperacion=? WHERE correo=?";
+                PreparedStatement psUpdate = con.prepareStatement(updateSql);
+                psUpdate.setString(1, token);
+                psUpdate.setString(2, correo);
+                psUpdate.executeUpdate();
+                psUpdate.close();
 
-            String token = UUID.randomUUID().toString();
+                String enlace = "http://localhost:8080/Login_ReservaFacil/reset-password.html?token=" + token;
+                
+                EmailUtil.enviarCorreo(correo, enlace);
 
-            String updateSql = "UPDATE usuarios SET token_recuperacion=? WHERE correo=?";
+                response.sendRedirect("recuperar.html?msg=ok");
+            } else {
+                response.sendRedirect("recuperar.html?msg=error");
+            }
 
-            PreparedStatement psUpdate =
-            con.prepareStatement(updateSql);
-
-            psUpdate.setString(1, token);
-            psUpdate.setString(2, correo);
-
-            psUpdate.executeUpdate();
-
-            String enlace = "http://localhost:8080/Login_ReservaFacil/reset-password.html?token="
-            + token;
-
-            EmailUtil.enviarCorreo(correo, enlace);
-
-            psUpdate.close();
-
-            response.sendRedirect("recuperar.html?msg=ok");
-
-} else {
-
-            response.sendRedirect("recuperar.html?msg=error");
-
-}
+            ps.close();
+            con.close();
 
         } catch (Exception e) {
             e.printStackTrace();

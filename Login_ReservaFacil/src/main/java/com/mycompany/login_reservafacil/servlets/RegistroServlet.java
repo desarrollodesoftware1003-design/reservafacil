@@ -14,9 +14,9 @@ import org.mindrot.jbcrypt.BCrypt;
 @WebServlet("/registro")
 public class RegistroServlet extends HttpServlet {
 
-    String url = "jdbc:mysql://localhost:3307/reservafacil?useSSL=false&serverTimezone=UTC";
-    String user = "root";
-    String pass = "ae020912";
+    String url = System.getenv("DB_URL");
+    String user = System.getenv("DB_USER");
+    String pass = System.getenv("DB_PASSWORD");
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -49,7 +49,6 @@ public class RegistroServlet extends HttpServlet {
             ps.close();
             con.close();
 
-            // Redirige a página de éxito
             response.sendRedirect("registro_exitoso.html");
 
         } catch (Exception e) {

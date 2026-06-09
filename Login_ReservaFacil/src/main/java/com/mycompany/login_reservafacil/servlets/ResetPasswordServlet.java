@@ -16,9 +16,9 @@ import org.mindrot.jbcrypt.BCrypt;
 @WebServlet("/reset-password")
 public class ResetPasswordServlet extends HttpServlet {
 
-    String url = "jdbc:mysql://localhost:3307/reservafacil";
-    String user = "root";
-    String pass = "ae020912";
+    String url = System.getenv("DB_URL");
+    String user = System.getenv("DB_USER");
+    String pass = System.getenv("DB_PASSWORD");
 
     @Override
     protected void doPost(HttpServletRequest request,

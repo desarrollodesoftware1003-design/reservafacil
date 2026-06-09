@@ -8,8 +8,8 @@ public class EmailUtil {
 
     public static void enviarCorreo(String destino, String enlace) {
 
-        final String remitente = "reservafacillapp@gmail.com";
-        final String password = "aubxvnviyyduufba";
+        final String remitente = ConfigUtil.get("mail.user");
+        final String password = ConfigUtil.get("mail.password");
 
         Properties props = new Properties();
 
@@ -39,13 +39,13 @@ public class EmailUtil {
 
             mensaje.setSubject("Recuperación de contraseña - ReservaFácil");
 
-            mensaje.setText(
+             mensaje.setText(
             "Hola,\n\n" +
             "Haz clic en el siguiente enlace para restablecer tu contraseña:\n\n" +
             enlace +
             "\n\nSi no solicitaste este cambio, ignora este correo.\n\n" +
             "Equipo ReservaFácil"
-            );
+    );
 
             Transport.send(mensaje);
 
@@ -54,5 +54,9 @@ public class EmailUtil {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void enviarCorreo(String correo, String enlace, String mailUser, String mailPass) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
